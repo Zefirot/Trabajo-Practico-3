@@ -16,27 +16,23 @@ public class CentroDistribucion {
 	}
 	
 	public void agregarCliente(Cliente cliente, int distancia) {
-		
 		clientes.put(cliente, distancia);
-		
 	}
 	
 	public void eliminarCliente(Cliente cliente) {
-		
 		clientes.remove(cliente);
-		
 	}
 	
 	public boolean contiene(Cliente cliente) {
-		
 		return clientes.containsKey(cliente);
-		
+	}
+	
+	public int cantidadDeClientes() {
+		return clientes.size();
 	}
 	
 	public Map<Cliente,Integer> clientes(){
-		
 		return clientes;
-		
 	}
 	
 	public double getLatitud() {
