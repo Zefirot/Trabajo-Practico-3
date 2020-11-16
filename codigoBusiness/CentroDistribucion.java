@@ -2,6 +2,7 @@ package codigoBusiness;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class CentroDistribucion {
 
@@ -31,8 +32,8 @@ public class CentroDistribucion {
 		return clientes.size();
 	}
 	
-	public Map<Cliente,Integer> clientes(){
-		return clientes;
+	public Set<Cliente> clientes(){
+		return clientes.keySet();
 	}
 	
 	public double getLatitud() {
