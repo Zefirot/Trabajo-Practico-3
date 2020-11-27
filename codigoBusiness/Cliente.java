@@ -36,7 +36,6 @@ public class Cliente {
 	public double getLongitud() {
 		return longitud;
 	}
-	
-	
+
 	
 }
