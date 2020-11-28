@@ -18,21 +18,21 @@ public class CentroDistribucionJSON {
 		this.centros = new ArrayList<CentroDistribucion>();
 	}
 	
-	public void agregarPersona(CentroDistribucion persona) {
+	public void agregarCentro(CentroDistribucion persona) {
 		centros.add(persona);
 	}
 	
-	public CentroDistribucion getPersona(int i) {
+	public CentroDistribucion getCentro(int i) {
 		return centros.get(i);
 	}
 	
-	public int getCantidadPersonas() {
+	public int getCantidadCentros() {
 		return centros.size();
 	}
 	
-	public ArrayList<Cliente> getTodasLasPersonas(){
+	public ArrayList<CentroDistribucion> getTodosLosCentros(){
 		@SuppressWarnings("unchecked")
-		ArrayList<Cliente> ret = (ArrayList<Cliente>) centros.clone();
+		ArrayList<CentroDistribucion> ret = (ArrayList<CentroDistribucion>) centros.clone();
 		return ret;
 	}
 	
@@ -79,6 +79,18 @@ public class CentroDistribucionJSON {
 		return ret;
 	}
 	
-	
+	public static void main(String[] args) {
+		CentroDistribucion ct1 = new CentroDistribucion(-34.614845, -58.439443);
+		CentroDistribucion ct2 = new CentroDistribucion(-34.617251, -58.428688);
+		
+		CentroDistribucionJSON ct = new CentroDistribucionJSON();
+		ct.agregarCentro(ct1);
+		ct.agregarCentro(ct2);
+		
+		String json = ct.generarJSONPretty();
+		
+		ct.guardarJSON(json, "Centros.JSON");
+		
+	}
 	
 }

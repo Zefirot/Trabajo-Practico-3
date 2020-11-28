@@ -18,19 +18,19 @@ public class ClientesJSON {
 		this.clientes = new ArrayList<Cliente>();
 	}
 	
-	public void agregarPersona(Cliente persona) {
+	public void agregarCliente(Cliente persona) {
 		clientes.add(persona);
 	}
 	
-	public Cliente getPersona(int i) {
+	public Cliente getCliente(int i) {
 		return clientes.get(i);
 	}
 	
-	public int getCantidadPersonas() {
+	public int getCantidadClientes() {
 		return clientes.size();
 	}
 	
-	public ArrayList<Cliente> getTodasLasPersonas(){
+	public ArrayList<Cliente> getTodosLosClientes(){
 		@SuppressWarnings("unchecked")
 		ArrayList<Cliente> ret = (ArrayList<Cliente>) clientes.clone();
 		return ret;
@@ -77,6 +77,30 @@ public class ClientesJSON {
 		}
 		
 		return ret;
+	}
+	
+	
+	public static void main(String[] args) {
+		
+		Cliente c1 = new Cliente(-34.611489, -58.446047);
+		Cliente c2 = new Cliente(-34.617102, -58.445505); 
+		Cliente c3 = new Cliente(-34.619448, -58.437891);
+		Cliente c4 = new Cliente(-34.612499, -58.436736);
+		Cliente c5 = new Cliente(-34.616597, -58.422590);
+		Cliente c6 = new Cliente(-34.622062, -58.424755);
+		
+		ClientesJSON ct = new ClientesJSON();
+		ct.agregarCliente(c1);
+		ct.agregarCliente(c2);
+		ct.agregarCliente(c3);
+		ct.agregarCliente(c4);
+		ct.agregarCliente(c5);
+		ct.agregarCliente(c6);
+		
+		String jsonBasico = ct.generarJSONPretty();
+		
+		ct.guardarJSON(jsonBasico, "Clientes.JSON");
+		
 	}
 	
 	
