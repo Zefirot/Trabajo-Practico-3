@@ -2,6 +2,8 @@ package interfaz;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JSpinner;
@@ -30,6 +32,8 @@ public class JPanelCargarDatos extends JPanel {
 	
 	private ArrayList<Cliente> clientes;
 	private ArrayList<CentroDistribucion> centros;
+	
+	private JSpinner spinnerSoluciones;
 	
 	public JPanelCargarDatos() {
 		this.setBounds(0, 0, 521, 325);
@@ -61,8 +65,9 @@ public class JPanelCargarDatos extends JPanel {
 		checkBoxCentros.setEnabled(false);
 		add(checkBoxCentros);
 		
-		JSpinner spinnerSoluciones = new JSpinner();
+		spinnerSoluciones = new JSpinner();
 		spinnerSoluciones.setBounds(470, 29, 30, 20);
+		spinnerSoluciones.setEnabled(false);
 		add(spinnerSoluciones);
 		
 		//Botones
@@ -86,13 +91,25 @@ public class JPanelCargarDatos extends JPanel {
 				
 				centros = capturarArchivoCentros(btnCargarCentros, checkBoxCentros);
 				cargarTablaCentros(modelCentros);
-				setearSpinner(spinnerSoluciones);
+				setearSpinner();
 			}
 		});
 		btnCargarCentros.setBounds(146, 50, 89, 23);
 		add(btnCargarCentros);
 		
 		JButton btnProcesar = new JButton("Procesar");
+		btnProcesar.addMouseListener(new MouseAdapter() {
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				if(comprobarDatos()) {
+					UIMain.cambiarASolucion();
+				}
+				
+			}
+			
+		});
 		btnProcesar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnProcesar.setBounds(209, 280, 89, 23);
 		add(btnProcesar);
@@ -200,13 +217,35 @@ public class JPanelCargarDatos extends JPanel {
 		}
 	}
 	
-	private void setearSpinner(JSpinner spinnerSoluciones) {
-		SpinnerModel modelo = new SpinnerNumberModel(0, 0, centros.size(), 1);  
+	private void setearSpinner() {
+		SpinnerModel modelo = new SpinnerNumberModel(1, 1, centros.size(), 1);
 		spinnerSoluciones.setModel(modelo);
+		spinnerSoluciones.setEnabled(true);
+	}
+	
+	private boolean comprobarDatos() {
+		if(clientes==null || clientes.size()==0) {
+			JOptionPane.showMessageDialog(null, "Debe de existir al menos un cliente");
+			return false;
+		}
+		if(centros==null || centros.size()==0) {
+			JOptionPane.showMessageDialog(null, "Debe de existir al menos un centro");
+			return false;
+		}
+		
+		return true;
 	}
 	
 	public ArrayList<Cliente> getClientes() {
 		return clientes;
+	}
+	
+	public ArrayList<CentroDistribucion> getCentros(){
+		return centros;
+	}
+	
+	public int getCantidadSoluciones() {
+		return (int) spinnerSoluciones.getValue();
 	}
 	
 }

@@ -12,11 +12,11 @@ public class ProcesarDatos {
 	
 	private ArrayList<CentroDistribucion> soluciones;
 	
-	public ProcesarDatos(Set<Cliente> clientes, Set<CentroDistribucion> centros, int k) {
+	public ProcesarDatos(Set<Cliente> clientes, Set<CentroDistribucion> centros, int soluciones) {
 		
 		this.clientes = clientes;
 		this.centros = centros;
-		this.solucionesPosibles = k;
+		this.solucionesPosibles = soluciones;
 		
 		this.soluciones = new ArrayList<CentroDistribucion>();
 		
@@ -31,7 +31,7 @@ public class ProcesarDatos {
 			
 			construirSolucion();  //Se asigna todos los clientes al centro mas cercano - O(n^2)
 			
-			CentroDistribucion centroPosible = centroConMayoresClientes();  //Se busca el centro con mayor clientes - O(n)
+			CentroDistribucion centroPosible = centroConMayoresClientes();  //Se busca el centro con mayor clientes cercanos - O(n)
 		
 			//Se elimina ese centro como futura solucion y tambien se eliman sus clientes
 			centros.remove(centroPosible);
@@ -146,5 +146,5 @@ public class ProcesarDatos {
 		return soluciones;
 	}
 	
-	
+
 }

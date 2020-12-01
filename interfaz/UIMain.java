@@ -12,7 +12,8 @@ import javax.swing.UnsupportedLookAndFeelException;
 public class UIMain {
 
 	private JFrame frame;
-
+	private static JPanelCargarDatos panelDatos;
+	private static JPanelMostrarMapa panelMapa;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -50,9 +51,21 @@ public class UIMain {
 		layeredPane.setBounds(0, 0, 521, 325);
 		frame.getContentPane().add(layeredPane);
 		
-		JPanelCargarDatos panelDatos = new JPanelCargarDatos();
+		panelDatos = new JPanelCargarDatos();
 		panelDatos.setVisible(true);
 		layeredPane.add(panelDatos);
+		
+		panelMapa = new JPanelMostrarMapa();
+		panelMapa.setVisible(false);
+		layeredPane.add(panelMapa);
+		
+	}
+	
+	public static void cambiarASolucion() {
+		panelDatos.setVisible(false);
+		panelMapa.setVisible(true);
+		
+		panelMapa.setDatos(panelDatos.getClientes(), panelDatos.getCentros(), panelDatos.getCantidadSoluciones());
 		
 	}
 }
