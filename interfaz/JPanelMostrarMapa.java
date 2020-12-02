@@ -10,7 +10,9 @@ import javax.swing.JPanel;
 import org.openstreetmap.gui.jmapviewer.Coordinate;
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
 import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
+import org.openstreetmap.gui.jmapviewer.MapPolygonImpl;
 import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
+import org.openstreetmap.gui.jmapviewer.interfaces.MapPolygon;
 
 import codigoBusiness.CentroDistribucion;
 import codigoBusiness.Cliente;
@@ -59,20 +61,21 @@ public class JPanelMostrarMapa extends JPanel {
 		for(int i=0 ; i<soluciones.size() ; i++ ) {
 			
 			Coordinate cordenada = new Coordinate(soluciones.get(i).getLatitud(), soluciones.get(i).getLongitud());
-			MapMarker centro = new MapMarkerDot("Centro: "+i, cordenada);
+			MapMarker centro = new MapMarkerDot("Centro: "+i+1, cordenada);
 			centro.getStyle().setBackColor(Color.RED);
 			centro.getStyle().setColor(Color.RED);
 			
 			mapa.addMapMarker(centro);
-			
+
 			marcarClientes(soluciones.get(i).clientes());
 			
+			trazarRutaClienteCentro(soluciones.get(i), soluciones.get(i).clientes());
 		}
 		
 		
 	}
 	
-	public void marcarClientes(Set<Cliente> clientes) {
+	private void marcarClientes(Set<Cliente> clientes) {
 		int numeroCliente = 1;
 		for(Cliente cliente : clientes) {
 			
@@ -85,6 +88,23 @@ public class JPanelMostrarMapa extends JPanel {
 			
 			numeroCliente++;
 		}
+		
+	}
+	
+	private void trazarRutaClienteCentro(CentroDistribucion centro, Set<Cliente> clientes) {
+		
+		for(Cliente cliente : clientes) {
+			ArrayList<Coordinate> coordenadas = new ArrayList<Coordinate>();
+			
+			coordenadas.add(new Coordinate(centro.getLatitud(), centro.getLongitud()));
+			coordenadas.add(new Coordinate(cliente.getLatitud(),cliente.getLongitud()));
+			coordenadas.add(new Coordinate(centro.getLatitud(), centro.getLongitud()));
+			
+			MapPolygon polygono = new MapPolygonImpl(coordenadas);
+			
+			mapa.addMapPolygon(polygono);
+		}
+		
 		
 	}
 	
