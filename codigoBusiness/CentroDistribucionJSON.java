@@ -79,18 +79,5 @@ public class CentroDistribucionJSON {
 		return ret;
 	}
 	
-	public static void main(String[] args) {
-		CentroDistribucion ct1 = new CentroDistribucion(-34.614845, -58.439443);
-		CentroDistribucion ct2 = new CentroDistribucion(-34.617251, -58.428688);
-		
-		CentroDistribucionJSON ct = new CentroDistribucionJSON();
-		ct.agregarCentro(ct1);
-		ct.agregarCentro(ct2);
-		
-		String json = ct.generarJSONPretty();
-		
-		ct.guardarJSON(json, "Centros.JSON");
-		
-	}
 	
 }

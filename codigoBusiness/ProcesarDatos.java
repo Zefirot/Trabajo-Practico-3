@@ -1,7 +1,6 @@
 package codigoBusiness;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Set;
 
 public class ProcesarDatos {
@@ -29,13 +28,13 @@ public class ProcesarDatos {
 		
 		while( solucion<solucionesPosibles ) {  //K veces 
 			
-			construirSolucion();  //Se asigna todos los clientes al centro mas cercano - O(n^2)
+			construirSolucion();  //Se asigna todos los clientes al centro mas cercano 
 			
-			CentroDistribucion centroPosible = centroConMayoresClientes();  //Se busca el centro con mayor clientes cercanos - O(n)
+			CentroDistribucion centroPosible = centroConMayoresClientes();  //Se busca el centro con mayor clientes cercanos 
 		
 			//Se elimina ese centro como futura solucion y tambien se eliman sus clientes
 			centros.remove(centroPosible);
-			clientes.removeAll(centroPosible.clientes());  //O(n)
+			clientes.removeAll(centroPosible.clientes());  
 
 			//Se toma como un posible centro el centro encontrado con mayores clientes asignados
 			soluciones.add(centroPosible);
@@ -68,6 +67,7 @@ public class ProcesarDatos {
 		
 	}
 	
+	//Se busca el centro que tenga menor distancia con el cliente pasado como parametro
 	private CentroDistribucion centroConMenorDistancia(Cliente cliente) {
 		CentroDistribucion centroConMenorDistancia = null;
 		int distanciaMenor = Integer.MAX_VALUE;
@@ -88,8 +88,7 @@ public class ProcesarDatos {
 		return centroConMenorDistancia;
 	}
 	
-	
-	
+	//Esta funcion busca el centro que contiene un numero de clientes mas elevado
 	private CentroDistribucion centroConMayoresClientes() {
 		int clientes = 0;
 		CentroDistribucion centroConMayorClientes = null; 	
@@ -100,16 +99,14 @@ public class ProcesarDatos {
 				
 				clientes = centro.cantidadDeClientes();
 				centroConMayorClientes = centro;
-				
-			}
 			
+			}
 		}
-		
 		return centroConMayorClientes;
-		
 	}
 	
-	
+	//Las funciones siguientes se encargan de asignar los clientes que no pudieron entrar en alguna solucion posible
+	//a un centro que ya se encuentra como solucion factible
 	private void asignarClientesSueltos() {
 		
 		for(Cliente cliente : clientes) {
@@ -141,7 +138,7 @@ public class ProcesarDatos {
 	
 	}
 	
-	
+	//Se retorna la solucion encontrada
 	public ArrayList<CentroDistribucion> centrosPosibles(){
 		return soluciones;
 	}

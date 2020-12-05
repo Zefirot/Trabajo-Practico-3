@@ -38,15 +38,13 @@ public class CentroDistribucionTests {
 	}
 	
 	@Test
-	public void eliminarTest() {
-		centro.eliminarCliente(c3);
-		
-		assertFalse(centro.contiene(c3));
+	public void cantidadDeClientesTest() {
+		assertEquals(4, centro.cantidadDeClientes());
 	}
 	
 	@Test
-	public void cantidadDeClientesTest() {
-		assertEquals(4, centro.cantidadDeClientes());
+	public void costoTotal() {
+		assertEquals(0, Double.compare(585115.0, centro.costoTotal()));
 	}
 	
 	@Test
